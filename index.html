@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrator</title>
+  <link rel="stylesheet" href="style.css">
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Práctica de Propiedades de la Integral</h1>
+    <select id="propiedadSelect">
+      <option value="">Seleccionar propiedad...</option>
+      <option value="homogeneidad">Homogeneidad</option>
+      <option value="nula">Nula o Límites iguales</option>
+      <option value="cambio">Cambio de Límites</option>
+      <option value="linealidad">Linealidad</option>
+      <option value="aditividad">Aditividad</option>
+      <option value="monotonia">Monotonía o Conservación del orden</option>
+      <option value="absoluto">Valor absoluto o Desigualdad triangular</option>
+    </select>
+  </header>
+
+  <main>
+    <section id="descripcion"></section>
+
+    <section id="generador">
+      <button id="btnGenerar">Generar ejercicio</button>
+      <div id="ejercicio"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
