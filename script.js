@@ -7,11 +7,13 @@ const propiedades = {
   homogeneidad: {
     desc: `**Propiedad de la Homogeneidad o Constante fuera de la integral**:
     Si una función está multiplicada por una constante, se puede sacar la constante fuera de la integral:
-    $$\\int_a^b k f(x) dx = k \\int_a^b f(x) dx$$`,
+    $$\\int_a^b k \cdot f(x)\, dx = k \cdot \\int_a^b f(x)\, dx$$`,
     generador: () => {
       const k = Math.floor(Math.random() * 5) + 2;
       const n = Math.floor(Math.random() * 3) + 1;
-      return `\\(\\int ${k} x^${n} dx\\), aplicá la propiedad para sacar la constante fuera de la integral.`;
+      const a = Math.floor(Math.random() * 5);
+      const b = a + Math.floor(Math.random() * 3) + 2;
+      return `\\(\\int ${k} \cdot x^${n} \,dx\\), aplicá la propiedad para sacar la constante fuera de la integral.`;
     }
   },
 
