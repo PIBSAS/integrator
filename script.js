@@ -15,11 +15,11 @@ function funcionAleatoria() {
   switch(tipo) {
     case "polinomica":
       let n = Math.floor(Math.random() * 3) + 1;
-      return `x^${n}`;
+      return `x^{${n}}`;
     case "trigonometrica":
       let trig = Math.random() < 0.5 ? "sin" : "cos";
       let m = Math.floor(Math.random() * 3) + 1;
-      return `${trig}(${m}x)`;
+      return `\\${trig}(${m}x)`;
     case "exponencial":
       let base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
       let exp = Math.floor(Math.random() * 3) + 1;
@@ -92,7 +92,7 @@ const propiedades = {
       let c = a + aleatorio(1,3);
       let b = c + aleatorio(1,3);
       let fx = funcionAleatoria();
-      return `\\(\\int_{${a}}^{${c}} ${fx} \\ dx\\) + \(\\int_{${c}}^{${b}} ${fx} \\ dx\\) = \\(\\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
+      return `\\(\\int_{${a}}^{${c}} ${fx} \\ dx + \\int_{${c}}^{${b}} ${fx} \\ dx\\) = \\(\\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
     }
   },
   
