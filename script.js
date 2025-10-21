@@ -3,48 +3,53 @@ const select = document.getElementById("propiedadSelect");
 const btnGenerar = document.getElementById("btnGenerar");
 const ejercicioDiv = document.getElementById("ejercicio");
 
+function aleatorio(min, max, allowNeg = true) {
+  let valor = Math.floor(Math.random() * (max - min + 1)) + min;
+  if (allowNeg && Math.random() < 0.5) valor *= -1;
+  return valor;
+}
+
+function funcionAleatoria() {
+  const tipos = ["polinomica", "trigonometrica", "exponencial"];
+  const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+  switch(tipo) {
+    case "polinomica":
+      const n = Math.floor(Math.random() * 3) + 1;
+      return `x^${n}`;
+    case "trigonometrica":
+      const trig = Math.random() < 0.5 ? "sin" : "cos";
+      const m = Math.floor(Math.random() * 3) + 1;
+      return `${trig}(${m}x)`;
+    case "exponencial":
+      const base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
+      const exp = Math.floor(Math.random() * 3) + 1;
+      return base === "e" ? `e^(${exp}x)` : `${base}^x`;
+  }
+}
+
 const propiedades = {
   homogeneidad: {
     desc: `**Propiedad de la Homogeneidad o Constante fuera de la integral**:
     Si una función está multiplicada por una constante, se puede sacar la constante fuera de la integral:
     $$\\int_a^b k \\cdot f(x)\\, dx = k \\cdot \\int_a^b f(x)\\, dx$$`,
     generador: () => {
-      const k = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 5) + 1);
-      let a = (Math.random() < 0.5 ? -1 : 1) * Math.floor(Math.random() * 5);
-      let b = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 5) + 1);
-      if (a > b) [a, b] = [b, a];
-      const tipos = ["polinomica", "trigonometrica", "exponencial"];
-    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
-
-    let fx = "";
-    switch(tipo) {
-      case "polinomica":
-        const n = Math.floor(Math.random() * 3) + 1;
-        fx = `x^${n}`;
-        break;
-      case "trigonometrica":
-        const trig = Math.random() < 0.5 ? "sin" : "cos";
-        const m = Math.floor(Math.random() * 3) + 1;
-        fx = `${trig}(${m}x)`;
-        break;
-      case "exponencial":
-        const base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
-        const exp = Math.floor(Math.random() * 3) + 1;
-        fx = base === "e" ? `e^(${exp}x)` : `${base}^x`;
-        break;
-    }
-      
+      const k = aleatorio(1,5);
+      const a = aleatorio(0,5);
+      let b = aleatorio(0,5);
+      if(a > b) [a,b] = [b,a];
+      const fx = funcionAleatoria();
       return `Calculá \\(\\int_${a}^{${b}} ${k} \\cdot ${fx} \\, dx\\) aplicando la propiedad de homogeneidad.`;
     }
   },
-
+  
   nula: {
     desc: `**Propiedad de integral nula o límites iguales**:
     Si los límites de integración coinciden, la integral vale cero:
     $$\\int_a^a f(x) dx = 0$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 5);
-      return `Calculá \\(\\int_${a}^${a} (3x^2 + 2) dx\\) y verificá que da 0.`;
+      const a = aleatorio(0,5);
+      const fx = funcionAleatoria();
+      return `Calculá \\(\\int_${a}^{${a}} ${fx} \\, dx\\) y verificá que da 0.`;
     }
   },
   
@@ -53,9 +58,11 @@ const propiedades = {
     Si se cambian los límites de integración de la integral definida, el resultado es el mismo pero cambiado de signo:
     $$\\int_b^a f(x) dx = -\\int_a^b f(x) dx$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 3);
-      const b = a + Math.floor(Math.random() * 3) + 2;
-      return `Calculá \\(\\int_${b}^${a} x dx\\) y comprobá que es igual a -\\(\\int_${a}^${b} x dx\\).`;
+      let a = aleatorio(0,3);
+      let b = aleatorio(0,3);
+      if(a === b) b += 1;
+      const fx = funcionAleatoria();
+      return `Calculá \\(\\int_${b}^${a} ${fx} \\, dx\\) y comprobá que es igual a -\\(\\int_${a}^${b} ${fx} \\, dx\\).`;
     }
   },
   
@@ -64,10 +71,12 @@ const propiedades = {
     La integral de una suma de dos o más funciones es igual a la suma de las integrales de cada función por separado. Por lo tanto, podemos primero sumar las funciones y luego hacer la integración o, por otro lado, primero resolver la integral de cada función y luego sumar los resultados obtenidos.
     $$\\int_a^b [f(x) + g(x)]dx = \\int_a^b f(x)dx + \\int_a^b g(x)dx$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 5) + 1;
-      const b = Math.floor(Math.random() * 5) + 1;
-      const n = Math.floor(Math.random() * 4) + 1;
-      return `\\(\\int (${a}x^{${n}} + ${b}x)\\,dx\\), aplicá la propiedad de linealidad para separar la integral.`;
+      const a = aleatorio(0,5);
+      let b = aleatorio(0,5);
+      if(a > b) [a,b] = [b,a];
+      const f = funcionAleatoria();
+      const g = funcionAleatoria();
+      return `Calculá \\(\\int_${a}^{${b}} (${f} + ${g}) \\, dx\\) aplicando la propiedad de linealidad.`;
     }
   },
   
@@ -79,10 +88,11 @@ const propiedades = {
     y otra integral definida en el intervalo [c,b].:
     $$\\int_a^b f(x) dx = \\int_a^c f(x) dx + \\int_c^b f(x) dx$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 3);
-      const c = a + Math.floor(Math.random() * 3) + 1;
-      const b = c + Math.floor(Math.random() * 3) + 1;
-      return `Calculá \\(\\int_a^c x^2 dx\\) y \\(\\int_c^b x^2 dx\\), luego sumalas usando la propiedad de aditividad.`;
+      const a = aleatorio(0,3);
+      const c = a + aleatorio(1,3);
+      const b = c + aleatorio(1,3);
+      const fx = funcionAleatoria();
+      return `Calculá \\(\\int_${a}^{${c}} ${fx} \\, dx\\) y \\(\\int_${c}^{${b}} ${fx} \\, dx\\), luego sumalas aplicando la propiedad de aditividad.`;
     }
   },
   
@@ -94,9 +104,11 @@ const propiedades = {
     Si $$f(x) \le g(x)$$ en [a,b], entonces
     $$\\int_a^b f(x) dx \\le \\int_a^b g(x) dx$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 3);
-      const b = a + Math.floor(Math.random() * 3) + 2;
-      return `Dadas las funciones f(x) = x y g(x) = x+2, compará \\(\\int_${a}^${b} f(x) dx\\) y \\(\\int_${a}^${b} g(x) dx\\) usando la propiedad de monotonía.`;
+      const a = aleatorio(0,3);
+      const b = a + aleatorio(2,4);
+      const f = funcionAleatoria();
+      const g = funcionAleatoria();
+      return `Compará \\(\\int_${a}^{${b}} ${f} \\, dx\\) y \\(\\int_${a}^{${b}} ${g} \\, dx\\) usando la propiedad de monotonía.`;
     }
   },
 
@@ -106,9 +118,10 @@ const propiedades = {
     el valor absoluto de la integral es menor o igual que la integral del valor absoluto:
     $$\\left| \\int_a^b f(x) dx \\right| \\le \\int_a^b |f(x)| dx$$`,
     generador: () => {
-      const a = Math.floor(Math.random() * 2);
-      const b = a + Math.floor(Math.random() * 3) + 2;
-      return `Dada f(x) = x - 1, compará \\(|\\int_${a}^${b} f(x) dx|\\) con \\(\\int_${a}^${b} |f(x)| dx\\) usando la desigualdad del valor absoluto.`;
+      const a = aleatorio(0,2);
+      const b = a + aleatorio(2,4);
+      const fx = funcionAleatoria();
+      return `Compará \\(|\\int_${a}^{${b}} ${fx} \\, dx|\\) con \\(\\int_${a}^{${b}} |${fx}| \\, dx\\) usando la desigualdad del valor absoluto.`;
     }
   },
 };
