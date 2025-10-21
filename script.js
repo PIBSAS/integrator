@@ -23,7 +23,7 @@ function funcionAleatoria() {
     case "exponencial":
       let base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
       let exp = Math.floor(Math.random() * 3) + 1;
-      return base === "e" ? `e^(${exp}x)` : `${base}^x`;
+      return base === "e" ? `e^{(${exp}x)}` : `{${base}}^x`;
   }
 }
 
