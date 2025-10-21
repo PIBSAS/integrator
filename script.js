@@ -68,7 +68,7 @@ const propiedades = {
     Si una función es menor o igual que otra, 
     la integral de la primera función también es menor o igual que la integral de la segunda función. 
     De manera que después de la integración las funciones conservan su relación.
-    Si \(f(x) \le g(x)\) en [a,b], entonces
+    Si $$f(x) \le g(x)$$ en [a,b], entonces
     $$\\int_a^b f(x) dx \\le \\int_a^b g(x) dx$$`,
     generador: () => {
       const a = Math.floor(Math.random() * 3);
