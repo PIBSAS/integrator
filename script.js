@@ -129,7 +129,7 @@ const propiedades = {
 select.addEventListener("change", () => {
   const prop = propiedades[select.value];
   if (prop) {
-    descripcionDiv.innerHTML = marked.parse(prop.desc);
+    descripcionDiv.innerHTML = marked.parse(prop.desc).replace(/\\\\/g, "\\");
     MathJax.typesetPromise();
     ejercicioDiv.innerHTML = "";
   } else {
