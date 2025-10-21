@@ -31,25 +31,25 @@ const propiedades = {
   homogeneidad: {
     desc: `**Propiedad de la Homogeneidad o Constante fuera de la integral**:
     Si una función está multiplicada por una constante, se puede sacar la constante fuera de la integral:
-    $$\\int_a^b k \\cdot f(x)\\, dx = k \\cdot \\int_a^b f(x)\\, dx$$`,
+    $$\\int_a^b k \\cdot f(x) \\ dx = k \\cdot \\int_a^b f(x) \\ dx$$`,
     generador: () => {
       const k = aleatorio(1,5);
       const a = aleatorio(0,5);
       let b = aleatorio(0,5);
       if(a > b) [a,b] = [b,a];
       const fx = funcionAleatoria();
-      return `\\(\\int_{${a}^{${b}} ${k} \\cdot ${fx} \\, dx\\)`;
+      return `\\(\\int_{${a}}^{${b}} ${k} \\cdot ${fx} \\ dx\\)`;
     }
   },
   
   nula: {
     desc: `**Propiedad de integral nula o límites iguales**:
     Si los límites de integración coinciden, la integral vale cero:
-    $$\\int_a^a f(x) dx = 0$$`,
+    $$\\int_a^a f(x) \\ dx = 0$$`,
     generador: () => {
       const a = aleatorio(0,5);
       const fx = funcionAleatoria();
-      return `Calculá \\(\\int_${a}^{${a}} ${fx} \\, dx\\) y verificá que da 0.`;
+      return `\\(\\int_{${a}}^{${a}} ${fx} \\ dx\\)`;
     }
   },
   
@@ -62,21 +62,21 @@ const propiedades = {
       let b = aleatorio(0,3);
       if(a === b) b += 1;
       const fx = funcionAleatoria();
-      return `Calculá \\(\\int_${b}^${a} ${fx} \\, dx\\) y comprobá que es igual a -\\(\\int_${a}^${b} ${fx} \\, dx\\).`;
+      return `\\(\\int_{${b}}^{${a}} ${fx} \\ dx\\)`;
     }
   },
   
   linealidad: {
     desc: `**Propiedad de linealidad o Suma**:
     La integral de una suma de dos o más funciones es igual a la suma de las integrales de cada función por separado. Por lo tanto, podemos primero sumar las funciones y luego hacer la integración o, por otro lado, primero resolver la integral de cada función y luego sumar los resultados obtenidos.
-    $$\\int_a^b [f(x) + g(x)]dx = \\int_a^b f(x)dx + \\int_a^b g(x)dx$$`,
+    $$\\int_a^b [f(x) + g(x)]dx = \\int_a^b f(x) \\ dx + \\int_a^b g(x) \\ dx$$`,
     generador: () => {
       const a = aleatorio(0,5);
       let b = aleatorio(0,5);
       if(a > b) [a,b] = [b,a];
       const f = funcionAleatoria();
       const g = funcionAleatoria();
-      return `Calculá \\(\\int_${a}^{${b}} (${f} + ${g}) \\, dx\\) aplicando la propiedad de linealidad.`;
+      return `\\(\\int_{${a}}^{${b}} \\left[ ${f} + ${g} \\right] \\ dx\\)`;
     }
   },
   
@@ -86,13 +86,13 @@ const propiedades = {
     la integral definida en el intervalo [a,b] se puede descomponer en dos integrales: 
     una integral definida en el intervalo [a,c] 
     y otra integral definida en el intervalo [c,b].:
-    $$\\int_a^b f(x) dx = \\int_a^c f(x) dx + \\int_c^b f(x) dx$$`,
+    $$\\int_a^b f(x) \\ dx = \\int_a^c f(x) \\ dx + \\int_c^b f(x) \\ dx$$`,
     generador: () => {
       const a = aleatorio(0,3);
       const c = a + aleatorio(1,3);
       const b = c + aleatorio(1,3);
       const fx = funcionAleatoria();
-      return `Calculá \\(\\int_${a}^{${c}} ${fx} \\, dx\\) y \\(\\int_${c}^{${b}} ${fx} \\, dx\\), luego sumalas aplicando la propiedad de aditividad.`;
+      return `\\(\\int_{${a}}^{${c}} ${fx} \\ dx\\) + \(\\int_{${c}}^{${b}} ${fx} \\ dx\\) = \\(\\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
     }
   },
   
@@ -101,14 +101,14 @@ const propiedades = {
     Si una función es menor o igual que otra, 
     la integral de la primera función también es menor o igual que la integral de la segunda función. 
     De manera que después de la integración las funciones conservan su relación.
-    Si $$f(x) \le g(x)$$ en [a,b], entonces
-    $$\\int_a^b f(x) dx \\le \\int_a^b g(x) dx$$`,
+    Si $f(x) \\leq g(x)$ en [a,b], entonces
+    $$\\int_a^b f(x) \\ dx \\leq \\int_a^b g(x) \\ dx$$`,
     generador: () => {
       const a = aleatorio(0,3);
       const b = a + aleatorio(2,4);
       const f = funcionAleatoria();
       const g = funcionAleatoria();
-      return `Compará \\(\\int_${a}^{${b}} ${f} \\, dx\\) y \\(\\int_${a}^{${b}} ${g} \\, dx\\) usando la propiedad de monotonía.`;
+      return `\\(\\int_{${a}}^{${b}} ${f} \\ dx \\leq \\int_{${a}}^{${b}} ${g} \\ dx\\)`;
     }
   },
 
@@ -116,12 +116,12 @@ const propiedades = {
     desc: `**Propiedad del valor absoluto de la integral o Desigualdad triangular**:
     Si al efectuar el valor absoluto a una función da como resultado una función integrable,
     el valor absoluto de la integral es menor o igual que la integral del valor absoluto:
-    $$\\left| \\int_a^b f(x) dx \\right| \\le \\int_a^b |f(x)| dx$$`,
+    $$\\left| \\int_a^b f(x) \\ dx \\right| \\leq \\int_a^b |f(x)| \\ dx$$`,
     generador: () => {
       const a = aleatorio(0,2);
       const b = a + aleatorio(2,4);
       const fx = funcionAleatoria();
-      return `Compará \\(|\\int_${a}^{${b}} ${fx} \\, dx|\\) con \\(\\int_${a}^{${b}} |${fx}| \\, dx\\) usando la desigualdad del valor absoluto.`;
+      return `\\(\\left| \\int_{${a}}^{${b}} ${fx} \\ dx \\right|  \\leq \\int_{${a}}^{${b}} |${fx}| \\ dx\\)`;
     }
   },
 };
