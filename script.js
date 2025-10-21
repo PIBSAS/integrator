@@ -3,9 +3,21 @@ const select = document.getElementById("propiedadSelect");
 const btnGenerar = document.getElementById("btnGenerar");
 const ejercicioDiv = document.getElementById("ejercicio");
 
-function aleatorio(min, max, allowNeg = true) {
+function aleatorio(min, max, allowNeg = true, permitirPi = false) {
   let valor = Math.floor(Math.random() * (max - min + 1)) + min;
   if (allowNeg && Math.random() < 0.5) valor *= -1;
+  if (permitirPi && Math.random() < 0.5) {
+    const multiplos = [-2, -1, 1, 2, 3];
+    const seleccion = multiplos[Math.floor(Math.random() * multiplos.length)];
+    switch(seleccion) {
+      case -2: return "-π";
+      case -1: return "-π/2";
+      case 1: return "π/2";
+      case 2: return "π";
+      case 3: return "3π/2";
+    }
+  }
+  
   return valor;
 }
 
@@ -34,8 +46,8 @@ const propiedades = {
     $$\\int_a^b k \\cdot f(x) \\ dx = k \\cdot \\int_a^b f(x) \\ dx$$`,
     generador: () => {
       let k = aleatorio(1,5);
-      let a = aleatorio(0,5);
-      let b = aleatorio(0,5);
+      let a = aleatorio(0,9, true, true);
+      let b = aleatorio(0,9, true, true);
       if(a > b) [a,b] = [b,a];
       let fx = funcionAleatoria();
       return `\\(\\int_{${a}}^{${b}} ${k} \\cdot ${fx} \\ dx\\)`;
@@ -47,7 +59,7 @@ const propiedades = {
     Si los límites de integración coinciden, la integral vale cero:
     $$\\int_a^a f(x) \\ dx = 0$$`,
     generador: () => {
-      let a = aleatorio(0,5);
+      let a = aleatorio(0,9, true, true);
       let fx = funcionAleatoria();
       return `\\(\\int_{${a}}^{${a}} ${fx} \\ dx\\)`;
     }
@@ -58,8 +70,8 @@ const propiedades = {
     Si se cambian los límites de integración de la integral definida, el resultado es el mismo pero cambiado de signo:
     $$\\int_b^a f(x) dx = -\\int_a^b f(x) dx$$`,
     generador: () => {
-      let a = aleatorio(0,3);
-      let b = aleatorio(0,3);
+      let a = aleatorio(0,9, true, true);
+      let b = aleatorio(0,9, true, true);
       if(a === b) b += 1;
       let fx = funcionAleatoria();
       return `\\(\\int_{${b}}^{${a}} ${fx} \\ dx\\)`;
@@ -71,8 +83,8 @@ const propiedades = {
     La integral de una suma de dos o más funciones es igual a la suma de las integrales de cada función por separado. Por lo tanto, podemos primero sumar las funciones y luego hacer la integración o, por otro lado, primero resolver la integral de cada función y luego sumar los resultados obtenidos.
     $$\\int_a^b [f(x) + g(x)] \\ dx = \\int_a^b f(x) \\ dx + \\int_a^b g(x) \\ dx$$`,
     generador: () => {
-      let a = aleatorio(0,5);
-      let b = aleatorio(0,5);
+      let a = aleatorio(0,9, true, true);
+      let b = aleatorio(0,9, true, true);
       if(a > b) [a,b] = [b,a];
       let f = funcionAleatoria();
       let g = funcionAleatoria();
@@ -88,9 +100,9 @@ const propiedades = {
     y otra integral definida en el intervalo [c,b].:
     $$\\int_a^b f(x) \\ dx = \\int_a^c f(x) \\ dx + \\int_c^b f(x) \\ dx$$`,
     generador: () => {
-      let a = aleatorio(0,3);
-      let c = a + aleatorio(1,3);
-      let b = c + aleatorio(1,3);
+      let a = aleatorio(0,9, true, true);
+      let c = a + aleatorio(0, 9, true, true);
+      let b = aleatorio(0,9, true, true);
       let fx = funcionAleatoria();
       return `\\( \\int_{${a}}^{${c}} ${fx} \\ dx + \\int_{${c}}^{${b}} ${fx} \\ dx = \\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
     }
@@ -104,8 +116,8 @@ const propiedades = {
     Si \\(f(x) \\leq g(x)\\) en [a,b], entonces
     $$\\int_a^b f(x) \\ dx \\leq \\int_a^b g(x) \\ dx$$`,
     generador: () => {
-      let a = aleatorio(0,3);
-      let b = a + aleatorio(2,4);
+      let a = aleatorio(0,9, true, true);
+      let b = aleatorio(0,9, true, true);
       let f = funcionAleatoria();
       let g = funcionAleatoria();
       return `\\(\\int_{${a}}^{${b}} ${f} \\ dx \\leq \\int_{${a}}^{${b}} ${g} \\ dx\\)`;
@@ -118,8 +130,8 @@ const propiedades = {
     el valor absoluto de la integral es menor o igual que la integral del valor absoluto:
     $$\\left| \\int_a^b f(x) \\ dx \\right| \\leq \\int_a^b |f(x)| \\ dx$$`,
     generador: () => {
-      let a = aleatorio(0,2);
-      let b = a + aleatorio(2,4);
+      let a = aleatorio(0,9, true, true);
+      let b = aleatorio(0,9, true, true);
       let fx = funcionAleatoria();
       return `\\(\\left| \\int_{${a}}^{${b}} ${fx} \\ dx \\right|  \\leq \\int_{${a}}^{${b}} |${fx}| \\ dx\\)`;
     }
