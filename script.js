@@ -37,7 +37,7 @@ const propiedades = {
   },
   
   linealidad: {
-    desc: `**Propiedad de linealidad**:
+    desc: `**Propiedad de linealidad o Suma**:
     La integral de una suma de dos o más funciones es igual a la suma de las integrales de cada función por separado. Por lo tanto, podemos primero sumar las funciones y luego hacer la integración o, por otro lado, primero resolver la integral de cada función y luego sumar los resultados obtenidos.
     $$\\int_a^b [f(x) + g(x)]dx = \\int_a^b f(x)dx + \\int_a^b g(x)dx$$`,
     generador: () => {
@@ -62,8 +62,9 @@ const propiedades = {
       return `Calculá \\(\\int_a^c x^2 dx\\) y \\(\\int_c^b x^2 dx\\), luego sumalas usando la propiedad de aditividad.`;
     }
   },
-  monotonía: {
-    desc: `**Propiedad de monotonía**:
+  
+  monotonia: {
+    desc: `**Propiedad de monotonía o Conservación del orden**:
     Si una función es menor o igual que otra, 
     la integral de la primera función también es menor o igual que la integral de la segunda función. 
     De manera que después de la integración las funciones conservan su relación.
@@ -76,8 +77,8 @@ const propiedades = {
     }
   },
 
-  valorAbsoluto: {
-    desc: `**Desigualdad del valor absoluto de la integral**:
+  absoluto: {
+    desc: `**Propiedad del valor absoluto de la integral o Desigualdad triangular**:
     Si al efectuar el valor absoluto a una función da como resultado una función integrable,
     el valor absoluto de la integral es menor o igual que la integral del valor absoluto:
     $$\\left| \\int_a^b f(x) dx \\right| \\le \\int_a^b |f(x)| dx$$`,
@@ -93,8 +94,8 @@ select.addEventListener("change", () => {
   const prop = propiedades[select.value];
   if (prop) {
     descripcionDiv.innerHTML = marked.parse(prop.desc);
-    ejercicioDiv.innerHTML = "";
     MathJax.typesetPromise();
+    ejercicioDiv.innerHTML = "";
   } else {
     descripcionDiv.innerHTML = "";
     ejercicioDiv.innerHTML = "";
