@@ -101,7 +101,7 @@ const propiedades = {
     Si una función es menor o igual que otra, 
     la integral de la primera función también es menor o igual que la integral de la segunda función. 
     De manera que después de la integración las funciones conservan su relación.
-    Si $f(x) \\leq g(x)$ en [a,b], entonces
+    Si \\(f(x) \\leq g(x) \\) en [a,b], entonces
     $$\\int_a^b f(x) \\ dx \\leq \\int_a^b g(x) \\ dx$$`,
     generador: () => {
       let a = aleatorio(0,3);
