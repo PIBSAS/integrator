@@ -38,7 +38,7 @@ const propiedades = {
       let b = aleatorio(0,5);
       if(a > b) [a,b] = [b,a];
       const fx = funcionAleatoria();
-      return `Calculá \\(\\int_${a}^{${b}} ${k} \\cdot ${fx} \\, dx\\) aplicando la propiedad de homogeneidad.`;
+      return `\\(\\int_{${a}^{${b}} ${k} \\cdot ${fx} \\, dx\\)`;
     }
   },
   
