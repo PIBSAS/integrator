@@ -63,3 +63,30 @@ main {
   border-radius: 6px;
   background: #f9f9f9;
 }
+
+.excelTable {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.excelTable th, .excelTable td {
+  border: 1px solid #666;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.excelTable th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.excelTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.excelTable tr:hover {
+  background-color: #ddd;
+}
