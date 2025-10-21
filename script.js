@@ -2,6 +2,7 @@ const descripcionDiv = document.getElementById("descripcion");
 const select = document.getElementById("propiedadSelect");
 const btnGenerar = document.getElementById("btnGenerar");
 const ejercicioDiv = document.getElementById("ejercicio");
+const tablaIntegralesDiv = document.getElementById("tablaIntegrales");
 
 function aleatorio(min, max, allowNeg = true) {
   let valor = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -141,6 +142,9 @@ const tablaIntegrales = `
 | \\csc(x)\\cot(x) | -\\csc(x) |
 `;
 
+tablaIntegralesDiv.innerHTML = marked.parse(tablaIntegrales);
+MathJax.typesetPromise();
+
 select.addEventListener("change", () => {
   const prop = propiedades[select.value];
   if (prop) {
@@ -156,7 +160,7 @@ select.addEventListener("change", () => {
 btnGenerar.addEventListener("click", () => {
   const prop = propiedades[select.value];
   if (prop) {
-    ejercicioDiv.innerHTML = prop.generador() + "<br><br>" + marked.parse(tablaIntegrales);;
+    ejercicioDiv.innerHTML = prop.generador();
     MathJax.typesetPromise();
   } else {
     ejercicioDiv.innerHTML = "Primero seleccioná una propiedad.";
