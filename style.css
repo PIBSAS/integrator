@@ -57,4 +57,9 @@ main {
 #ejercicio {
   margin-top: 1.5rem;
   font-size: 1.3rem;
+  min-height: 4rem;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: #f9f9f9;
 }
