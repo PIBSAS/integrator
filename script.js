@@ -69,7 +69,7 @@ const propiedades = {
   linealidad: {
     desc: `**Propiedad de linealidad o Suma**:
     La integral de una suma de dos o más funciones es igual a la suma de las integrales de cada función por separado. Por lo tanto, podemos primero sumar las funciones y luego hacer la integración o, por otro lado, primero resolver la integral de cada función y luego sumar los resultados obtenidos.
-    $$\\int_a^b [f(x) + g(x)]dx = \\int_a^b f(x) \\ dx + \\int_a^b g(x) \\ dx$$`,
+    $$\\int_a^b [f(x) + g(x)] \\ dx = \\int_a^b f(x) \\ dx + \\int_a^b g(x) \\ dx$$`,
     generador: () => {
       let a = aleatorio(0,5);
       let b = aleatorio(0,5);
@@ -92,7 +92,7 @@ const propiedades = {
       let c = a + aleatorio(1,3);
       let b = c + aleatorio(1,3);
       let fx = funcionAleatoria();
-      return `\\(\\int_{${a}}^{${c}} ${fx} \\ dx + \\int_{${c}}^{${b}} ${fx} \\ dx\\) = \\(\\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
+      return `\\( \\int_{${a}}^{${c}} ${fx} \\ dx + \\int_{${c}}^{${b}} ${fx} \\ dx = \\int_{${a}}^{${b}} ${fx} \\ dx\\)`;
     }
   },
   
