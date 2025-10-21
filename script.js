@@ -2,7 +2,6 @@ const descripcionDiv = document.getElementById("descripcion");
 const select = document.getElementById("propiedadSelect");
 const btnGenerar = document.getElementById("btnGenerar");
 const ejercicioDiv = document.getElementById("ejercicio");
-const tablaIntegralesDiv = document.getElementById("tablaIntegrales");
 
 function aleatorio(min, max, allowNeg = true) {
   let valor = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -126,24 +125,6 @@ const propiedades = {
     }
   },
 };
-
-const tablaIntegrales = `
-| Función | Integral indefinida |
-|---------|------------------|
-| x^n | \\frac{x^{n+1}}{n+1}, n \\neq -1 |
-| 1/x | \\ln|x| |
-| e^x | e^x |
-| e^{kx} | \\frac{1}{k} e^{kx} |
-| \\sin(x) | -\\cos(x) |
-| \\cos(x) | \\sin(x) |
-| \\sec^2(x) | \\tan(x) |
-| \\csc^2(x) | -\\cot(x) |
-| \\sec(x)\\tan(x) | \\sec(x) |
-| \\csc(x)\\cot(x) | -\\csc(x) |
-`;
-
-tablaIntegralesDiv.innerHTML = marked.parse(tablaIntegrales);
-MathJax.typesetPromise();
 
 select.addEventListener("change", () => {
   const prop = propiedades[select.value];
