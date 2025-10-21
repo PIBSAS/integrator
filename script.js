@@ -7,13 +7,34 @@ const propiedades = {
   homogeneidad: {
     desc: `**Propiedad de la Homogeneidad o Constante fuera de la integral**:
     Si una función está multiplicada por una constante, se puede sacar la constante fuera de la integral:
-    $$\\int_a^b k \cdot f(x)\, dx = k \cdot \\int_a^b f(x)\, dx$$`,
+    $$\\int_a^b k \\cdot f(x)\\, dx = k \\cdot \\int_a^b f(x)\\, dx$$`,
     generador: () => {
-      const k = Math.floor(Math.random() * 5) + 2;
-      const n = Math.floor(Math.random() * 3) + 1;
-      const a = Math.floor(Math.random() * 5);
-      const b = a + Math.floor(Math.random() * 3) + 2;
-      return `\\(\\int ${k} \cdot x^${n} \,dx\\), aplicá la propiedad para sacar la constante fuera de la integral.`;
+      const k = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 5) + 1);
+      let a = (Math.random() < 0.5 ? -1 : 1) * Math.floor(Math.random() * 5);
+      let b = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 5) + 1);
+      if (a > b) [a, b] = [b, a];
+      const tipos = ["polinomica", "trigonometrica", "exponencial"];
+    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+
+    let fx = "";
+    switch(tipo) {
+      case "polinomica":
+        const n = Math.floor(Math.random() * 3) + 1;
+        fx = `x^${n}`;
+        break;
+      case "trigonometrica":
+        const trig = Math.random() < 0.5 ? "sin" : "cos";
+        const m = Math.floor(Math.random() * 3) + 1;
+        fx = `${trig}(${m}x)`;
+        break;
+      case "exponencial":
+        const base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
+        const exp = Math.floor(Math.random() * 3) + 1;
+        fx = base === "e" ? `e^(${exp}x)` : `${base}^x`;
+        break;
+    }
+      
+      return `Calculá \\(\\int_${a}^{${b}} ${k} \\cdot ${fx} \\, dx\\) aplicando la propiedad de homogeneidad.`;
     }
   },
 
