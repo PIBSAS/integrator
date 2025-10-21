@@ -26,15 +26,15 @@ function funcionAleatoria() {
   const tipo = tipos[Math.floor(Math.random() * tipos.length)];
   switch(tipo) {
     case "polinomica":
-      let n = Math.floor(Math.random() * 3) + 1;
+      let n = Math.floor(Math.random() * 5) + 1;
       return `x^{${n}}`;
     case "trigonometrica":
       let trig = Math.random() < 0.5 ? "sin" : "cos";
-      let m = Math.floor(Math.random() * 3) + 1;
+      let m = Math.floor(Math.random() * 5) + 1;
       return `\\${trig}(${m}x)`;
     case "exponencial":
-      let base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 3) + 2);
-      let exp = Math.floor(Math.random() * 3) + 1;
+      let base = Math.random() < 0.5 ? "e" : (Math.floor(Math.random() * 6) + 2);
+      let exp = Math.floor(Math.random() * 5) + 1;
       return base === "e" ? `e^{(${exp}x)}` : `{${base}}^x`;
   }
 }
@@ -45,7 +45,7 @@ const propiedades = {
     Si una función está multiplicada por una constante, se puede sacar la constante fuera de la integral:
     $$\\int_a^b k \\cdot f(x) \\ dx = k \\cdot \\int_a^b f(x) \\ dx$$`,
     generador: () => {
-      let k = aleatorio(1,5);
+      let k = aleatorio(1,9);
       let a = aleatorio(0,9, true, true);
       let b = aleatorio(0,9, true, true);
       if(a > b) [a,b] = [b,a];
