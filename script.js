@@ -101,7 +101,7 @@ const propiedades = {
     Si una función es menor o igual que otra, 
     la integral de la primera función también es menor o igual que la integral de la segunda función. 
     De manera que después de la integración las funciones conservan su relación.
-    Si \\(f(x) \\leq g(x) \\) en [a,b], entonces
+    Si \\(f(x) \\leq g(x)\\) en [a,b], entonces
     $$\\int_a^b f(x) \\ dx \\leq \\int_a^b g(x) \\ dx$$`,
     generador: () => {
       let a = aleatorio(0,3);
@@ -126,6 +126,21 @@ const propiedades = {
   },
 };
 
+const tablaIntegrales = `
+| Función | Integral indefinida |
+|---------|------------------|
+| x^n | \\frac{x^{n+1}}{n+1}, n \\neq -1 |
+| 1/x | \\ln|x| |
+| e^x | e^x |
+| e^{kx} | \\frac{1}{k} e^{kx} |
+| \\sin(x) | -\\cos(x) |
+| \\cos(x) | \\sin(x) |
+| \\sec^2(x) | \\tan(x) |
+| \\csc^2(x) | -\\cot(x) |
+| \\sec(x)\\tan(x) | \\sec(x) |
+| \\csc(x)\\cot(x) | -\\csc(x) |
+`;
+
 select.addEventListener("change", () => {
   const prop = propiedades[select.value];
   if (prop) {
@@ -141,7 +156,7 @@ select.addEventListener("change", () => {
 btnGenerar.addEventListener("click", () => {
   const prop = propiedades[select.value];
   if (prop) {
-    ejercicioDiv.innerHTML = prop.generador();
+    ejercicioDiv.innerHTML = prop.generador() + "<br><br>" + marked.parse(tablaIntegrales);;
     MathJax.typesetPromise();
   } else {
     ejercicioDiv.innerHTML = "Primero seleccioná una propiedad.";
